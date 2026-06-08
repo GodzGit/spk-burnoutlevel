@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assessment Deteksi Burnout Mahasiswa - Fuzzy Mamdani</title>
+  
+  <!-- Google Fonts - Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- CSS Modular Links -->
+  <link rel="stylesheet" href="assets/css/variables.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/sections.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+  
+  <!-- Supabase JS Client CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  
+  <!-- Google reCAPTCHA CDN -->
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body>
+
+  <!-- NAVIGATION BAR -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">SPK<span>BURNOUT</span></a>
+      <nav class="nav-links">
+        <a href="index.html#hero" class="nav-link">Home</a>
+        <a href="index.html#about" class="nav-link">Tentang</a>
+        <a href="index.html#flow" class="nav-link">Cara Kerja</a>
+        <a href="index.html#statistics" class="nav-link">Statistik</a>
+      </nav>
+      <div class="flex-row" style="gap: var(--spacing-sm);">
+        <!-- Tombol Riwayat (Logo Jam) - Redirect ke index.html dan buka modal riwayat -->
+        <a href="index.html?openHistory=true" class="nav-link flex-center" title="Lihat Riwayat" style="display: inline-flex; color: var(--color-gray); transition: color var(--transition-fast), border-color var(--transition-fast), background-color var(--transition-fast); align-items: center; justify-content: center; width: 36px; height: 36px; border: var(--border-width) solid transparent; border-radius: var(--border-radius); padding: 0;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="icon-clock" style="vertical-align: middle;">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+        </a>
+        <a href="index.html" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.8rem;">Kembali Ke Beranda</a>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- WIZARD PAGE CONTAINER -->
+  <main class="page-wrapper">
+    <div class="assessment-card">
+      <div class="modal-header" style="background-color: var(--color-gray-light);">
+        <h3 class="modal-title">Assessment Kriteria</h3>
+        <span style="font-weight: 700; font-size: 0.8rem; text-transform: uppercase; color: var(--color-accent); letter-spacing: 0.05em;">Fuzzy Mamdani Engine</span>
+      </div>
+      
+      <div class="modal-body" style="padding: var(--spacing-lg);">
+        
+        <!-- STEP 1: FORM IDENTITAS -->
+        <div id="wizard-step-1" class="wizard-step active">
+          <h4 style="font-size: 1.25rem; margin-bottom: var(--spacing-md); border-bottom: 2px solid var(--color-black); padding-bottom: var(--spacing-xs);">
+            Langkah 1: Identitas Mahasiswa
+          </h4>
+          <p>Mohon isi identitas diri Anda secara benar untuk memulai proses analisis burnout akademik.</p>
+          
+          <div class="form-group">
+            <label for="input-nama">Nama Lengkap</label>
+            <input type="text" id="input-nama" class="input-field" placeholder="Masukkan nama Anda..." required>
+          </div>
+          
+          <div class="form-group">
+            <label for="input-prodi">Program Studi</label>
+            <input type="text" id="input-prodi" class="input-field" placeholder="Contoh: Teknik Informatika..." required>
+          </div>
+          
+          <div class="form-group">
+            <label for="input-semester">Semester Saat Ini</label>
+            <select id="input-semester" class="input-field" style="background-image: none;" required>
+              <option value="1">Semester 1</option>
+              <option value="2">Semester 2</option>
+              <option value="3">Semester 3</option>
+              <option value="4">Semester 4</option>
+              <option value="5">Semester 5</option>
+              <option value="6">Semester 6</option>
+              <option value="7">Semester 7</option>
+              <option value="8">Semester 8 atau lebih</option>
+            </select>
+          </div>
+          
+          <div style="margin-top: var(--spacing-lg); display: flex; gap: var(--spacing-md); justify-content: flex-end;">
+            <a href="index.html" class="btn btn-secondary">Batal</a>
+            <button id="btn-wizard-next-1" class="btn btn-primary">Lanjut</button>
+          </div>
+        </div>
+        
+        <!-- STEP 2: GOOGLE RECAPTCHA -->
+        <div id="wizard-step-2" class="wizard-step">
+          <h4 style="font-size: 1.25rem; margin-bottom: var(--spacing-md); border-bottom: 2px solid var(--color-black); padding-bottom: var(--spacing-xs);">
+            Langkah 2: Verifikasi Keamanan
+          </h4>
+          <p>Silakan verifikasi bahwa Anda bukan robot sebelum melanjutkan pengisian form assessment.</p>
+          
+          <div class="flex-center" style="margin: var(--spacing-xl) 0;">
+            <!-- Widget reCAPTCHA dengan test key -->
+            <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
+          </div>
+          
+          <div style="margin-top: var(--spacing-lg); display: flex; gap: var(--spacing-md); justify-content: flex-end;">
+            <a href="index.html" class="btn btn-secondary">Batal</a>
+            <button id="btn-wizard-next-2" class="btn btn-primary">Verifikasi & Lanjut</button>
+          </div>
+        </div>
+        
+        <!-- STEP 3: FORM ASSESSMENT SLIDERS -->
+        <div id="wizard-step-3" class="wizard-step">
+          <h4 style="font-size: 1.25rem; margin-bottom: var(--spacing-md); border-bottom: 2px solid var(--color-black); padding-bottom: var(--spacing-xs);">
+            Langkah 3: Form Kriteria Burnout
+          </h4>
+          <p>Geser slider di bawah ini sesuai dengan kondisi riil yang Anda rasakan belakangan ini.</p>
+          
+          <!-- Slider 1: Beban Akademik -->
+          <div class="slider-group">
+            <div class="slider-header">
+              <label for="slider-beban">Beban Akademik (0 - 100)</label>
+              <span id="val-beban" class="slider-value" style="color: var(--color-accent); font-size: 1.1rem;">50</span>
+            </div>
+            <p style="font-size: 0.8rem; margin-bottom: var(--spacing-xs);">Tingkat kesulitian, volume tugas kuliah, jam praktikum, dan tekanan ujian.</p>
+            <div class="slider-container">
+              <input type="range" id="slider-beban" class="brutalist-slider" min="0" max="100" value="50">
+            </div>
+          </div>
+          
+          <!-- Slider 2: Durasi Tidur -->
+          <div class="slider-group">
+            <div class="slider-header">
+              <label for="slider-tidur">Durasi Tidur Harian (0 - 12 Jam)</label>
+              <span id="val-tidur" class="slider-value" style="color: var(--color-accent); font-size: 1.1rem;">6</span>
+            </div>
+            <p style="font-size: 0.8rem; margin-bottom: var(--spacing-xs);">Rata-rata durasi tidur berkualitas yang Anda peroleh dalam 24 jam.</p>
+            <div class="slider-container">
+              <input type="range" id="slider-tidur" class="brutalist-slider" min="0" max="12" step="0.5" value="6">
+            </div>
+          </div>
+          
+          <!-- Slider 3: Aktivitas Non Akademik -->
+          <div class="slider-group">
+            <div class="slider-header">
+              <label for="slider-aktivitas">Aktivitas Non Akademik (0 - 100)</label>
+              <span id="val-aktivitas" class="slider-value" style="color: var(--color-accent); font-size: 1.1rem;">50</span>
+            </div>
+            <p style="font-size: 0.8rem; margin-bottom: var(--spacing-xs);">Keterlibatan dalam organisasi, unit kegiatan, hobi, sosialisasi, atau kerja sampingan.</p>
+            <div class="slider-container">
+              <input type="range" id="slider-aktivitas" class="brutalist-slider" min="0" max="100" value="50">
+            </div>
+          </div>
+          
+          <div style="margin-top: var(--spacing-lg); display: flex; gap: var(--spacing-md); justify-content: flex-end;">
+            <a href="index.html" class="btn btn-secondary">Batal</a>
+            <button id="btn-wizard-process" class="btn btn-primary">Proses Deteksi</button>
+          </div>
+        </div>
+        
+        <!-- STEP 4: PROSES FUZZY LOADING -->
+        <div id="wizard-step-4" class="wizard-step">
+          <div class="flex-center" style="flex-direction: column; padding: var(--spacing-xl) 0;">
+            <h4 style="font-size: 1.5rem; margin-bottom: var(--spacing-md); text-transform: uppercase;">
+              Mengevaluasi Kriteria Fuzzy...
+            </h4>
+            <p style="color: var(--color-gray); text-align: center; max-width: 450px; margin-bottom: var(--spacing-xl);">
+              Mohon tunggu sejenak, mesin logika fuzzy Mamdani sedang memproses data kriteria Anda di peramban.
+            </p>
+            
+            <div class="flex-column" style="width: 100%; max-width: 350px; gap: var(--spacing-sm);">
+              <div id="task-fuzzifikasi" class="checklist-item">
+                <div class="checklist-icon"></div>
+                <span>Fuzzifikasi Nilai Kriteria</span>
+              </div>
+              <div id="task-rules" class="checklist-item">
+                <div class="checklist-icon"></div>
+                <span>Evaluasi 27 Rule Implikasi</span>
+              </div>
+              <div id="task-inferensi" class="checklist-item">
+                <div class="checklist-icon"></div>
+                <span>Inferensi Logika Mamdani</span>
+              </div>
+              <div id="task-defuzzifikasi" class="checklist-item">
+                <div class="checklist-icon"></div>
+                <span>Defuzzifikasi Centroid (COA)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- STEP 5: HASIL DETEKSI -->
+        <div id="wizard-step-5" class="wizard-step">
+          <div class="flex-center" style="flex-direction: column; text-align: center;">
+            <h4 style="font-size: 1.5rem; margin-bottom: var(--spacing-md);">Hasil Analisis Burnout</h4>
+            
+            <!-- Progress Circle SVG -->
+            <div class="progress-circle-wrapper">
+              <svg class="progress-circle" width="150" height="150">
+                <circle class="progress-circle-bg" cx="75" cy="75" r="70" />
+                <circle id="result-circle-bar" class="progress-circle-bar" cx="75" cy="75" r="70" />
+              </svg>
+              <div id="result-score" class="progress-circle-value">0%</div>
+            </div>
+            
+            <!-- Badge Kategori -->
+            <div style="margin-top: var(--spacing-md); margin-bottom: var(--spacing-md);">
+              <span id="result-category" class="badge">Rendah</span>
+            </div>
+            
+            <!-- Teks Penjelasan/Rekomendasi -->
+            <div class="card" style="background-color: var(--color-gray-light); width: 100%; margin-bottom: var(--spacing-lg); border-style: dashed;">
+              <p style="font-weight: 700; color: var(--color-black); margin-bottom: var(--spacing-xs);">Interpretasi & Rekomendasi:</p>
+              <p id="result-recommendation" style="margin: 0; line-height: 1.5; color: var(--color-black); font-size: 0.95rem;"></p>
+            </div>
+            
+            <button id="btn-finish" class="btn btn-primary" style="min-width: 170px;">Selesai & Beranda</button>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </main>
+
+  <!-- Script wizard CSS active step layout override -->
+  <style>
+    .wizard-step {
+      display: none;
+    }
+    .wizard-step.active {
+      display: block;
+    }
+  </style>
+
+  <!-- Script modul inisialisasi -->
+  <script type="module" src="assets/js/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,80 @@
+/* layout.css */
+/* Natural height sections for a continuous landing page flow */
+section {
+  min-height: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 6rem var(--spacing-lg);
+  position: relative;
+  border-bottom: var(--border-width) solid var(--color-black);
+}
+
+/* Hero section can have a taller default height */
+.hero-section {
+  min-height: 80vh;
+  padding-top: 8rem;
+}
+
+/* Ensure no border on final sections or footer */
+section:last-of-type {
+  border-bottom: none;
+}
+
+
+/* Container for layouts */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
+/* Grid wrappers */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-xl);
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-lg);
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-md);
+}
+
+/* Helper flex layout utilities */
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}

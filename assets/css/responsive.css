@@ -1,0 +1,99 @@
+/* responsive.css */
+/* Mobile First is default. Below are overrides for Tablet, Laptop, and Desktop. */
+
+/* Tablet & Smaller Desktop (min-width: 768px) */
+@media (min-width: 768px) {
+  :root {
+    --font-size-base: 16px;
+  }
+
+  h1 {
+    font-size: 3.5rem;
+  }
+
+  h2 {
+    font-size: 2.5rem;
+  }
+
+  .grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  /* About Cards Grid */
+  .about-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* Horizontal Flow for Cara Kerja on Desktop */
+  .flow-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-sm);
+  }
+
+  .flow-step {
+    min-width: auto;
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: 0.95rem;
+  }
+
+  .flow-arrow {
+    margin: 0 var(--spacing-xs);
+  }
+
+  .flow-arrow::before {
+    content: "➔";
+  }
+
+  .flow-arrow-vertical {
+    display: none;
+  }
+
+  .flow-arrow-horizontal {
+    display: inline-block;
+  }
+
+  /* Statistics Section layout */
+  .stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Laptop & Large Desktop (min-width: 1024px) */
+@media (min-width: 1024px) {
+  section {
+    padding: var(--spacing-xxl) 0;
+  }
+
+  .hero-title {
+    font-size: 4rem;
+  }
+
+  .flow-container {
+    gap: var(--spacing-md);
+  }
+
+  .flow-step {
+    padding: var(--spacing-md) var(--spacing-lg);
+    font-size: 1.1rem;
+  }
+}
+
+/* Fallback displays for mobile arrows */
+.flow-arrow-horizontal {
+  display: none;
+}
+
+.flow-arrow-vertical {
+  display: inline-block;
+}

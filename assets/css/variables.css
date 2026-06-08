@@ -1,0 +1,43 @@
+/* variables.css */
+:root {
+  /* Colors - Swiss / Soft Brutalism Accent */
+  --color-white: #ffffff;
+  --color-gray-light: #f8fafc;
+  --color-gray-border: #e2e8f0;
+  --color-gray: #64748b;
+  --color-black: #0f172a;
+  --color-accent: #0284c7; /* Sky blue/Cobalt hybrid */
+  --color-accent-dark: #0369a1;
+  --color-accent-bg: #f0f9ff;
+  
+  /* Alert/Feedback Colors */
+  --color-success: #10b981;
+  --color-success-bg: #ecfdf5;
+  --color-warning: #f59e0b;
+  --color-warning-bg: #fffbeb;
+  --color-danger: #ef4444;
+  --color-danger-bg: #fef2f2;
+
+  /* Typography */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-size-base: 16px;
+  
+  /* Layout & Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-xxl: 4rem;
+
+  /* Borders & Shadows (Soft Brutalism) */
+  --border-width: 2px;
+  --border-radius: 4px; /* Crisp Swiss style, not too rounded */
+  --shadow-brutal: 4px 4px 0px 0px var(--color-black);
+  --shadow-brutal-sm: 2px 2px 0px 0px var(--color-black);
+  --shadow-brutal-hover: 6px 6px 0px 0px var(--color-black);
+  
+  /* Animation */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.3s ease;
+}

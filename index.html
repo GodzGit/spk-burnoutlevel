@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SPK Deteksi Burnout Mahasiswa - Fuzzy Mamdani</title>
+  
+  <!-- Google Fonts - Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- CSS Modular Links -->
+  <link rel="stylesheet" href="assets/css/variables.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/sections.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+  
+  <!-- Supabase JS Client CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  
+  <!-- Google reCAPTCHA CDN -->
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body>
+
+  <!-- NAVIGATION BAR -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="#" class="nav-logo">SPK<span>BURNOUT</span></a>
+      <nav class="nav-links">
+        <a href="#hero" class="nav-link">Home</a>
+        <a href="#about" class="nav-link">Tentang</a>
+        <a href="#flow" class="nav-link">Cara Kerja</a>
+        <a href="#statistics" class="nav-link">Statistik</a>
+      </nav>
+      <div class="flex-row" style="gap: var(--spacing-sm);">
+        <!-- Tombol Riwayat (Logo Jam) - Selalu terlihat di Mobile & Desktop -->
+        <a href="#" id="nav-view-history" class="nav-link flex-center" title="Lihat Riwayat" style="display: inline-flex; color: var(--color-gray); transition: color var(--transition-fast), border-color var(--transition-fast), background-color var(--transition-fast); align-items: center; justify-content: center; width: 36px; height: 36px; border: var(--border-width) solid transparent; border-radius: var(--border-radius); padding: 0;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="icon-clock" style="vertical-align: middle;">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+
+
+  <!-- SECTION 1 - HERO -->
+  <section id="hero" class="hero-section">
+    <div class="container hero-content">
+      <h1 class="hero-title">
+        Sistem Pendukung Keputusan Deteksi Tingkat Burnout Mahasiswa
+      </h1>
+      <p class="hero-subtitle">
+        Deteksi kelelahan akademik Anda secara dini menggunakan metode <strong>Fuzzy Inference System (FIS) Mamdani</strong>. Cepat, akurat, dan berdasarkan data ilmiah.
+      </p>
+      <div class="hero-buttons">
+        <a href="assessment.html" class="btn btn-primary">Mulai Assessment</a>
+        <a href="#about" class="btn btn-secondary">Pelajari Lebih Lanjut</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2 - TENTANG BURNOUT -->
+  <section id="about" class="about-section">
+    <div class="container">
+      <div style="text-align: center;">
+        <h2>Tentang Burnout Akademik</h2>
+        <p style="max-width: 700px; margin: 0 auto;">
+          Burnout akademik adalah kondisi kelelahan fisik, emosional, dan mental yang berkepanjangan akibat tuntutan kuliah yang berlebihan. Kenali gejalanya sejak dini untuk mencegah penurunan prestasi.
+        </p>
+      </div>
+      
+      <div class="about-cards">
+        <div class="about-card">
+          <div class="about-card-icon">🧠</div>
+          <h3 class="card-title">Kelelahan Mental</h3>
+          <p>Merasa terkuras secara emosional, frustrasi, dan tidak berdaya menghadapi tumpukan tugas serta ujian yang terus berdatangan.</p>
+        </div>
+        <div class="about-card">
+          <div class="about-card-icon">📉</div>
+          <h3 class="card-title">Dampak Akademik</h3>
+          <p>Mengakibatkan hilangnya konsentrasi, menurunnya daya ingat, penundaan tugas, hingga penurunan Indeks Prestasi Kumulatif (IPK).</p>
+        </div>
+        <div class="about-card">
+          <div class="about-card-icon">🎯</div>
+          <h3 class="card-title">Tujuan Deteksi</h3>
+          <p>Membantu mahasiswa mengukur beban stres mereka secara objektif dan mendapatkan rekomendasi pemulihan yang tepat sasaran.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3 - CARA KERJA SISTEM -->
+  <section id="flow" class="flow-section">
+    <div class="container">
+      <div style="text-align: center;">
+        <h2>Cara Kerja Sistem</h2>
+        <p style="max-width: 700px; margin: 0 auto;">
+          Sistem ini mengimplementasikan metode Fuzzy Inference System (FIS) Mamdani secara penuh di sisi client. Berikut adalah visualisasi alur proses pengolahan datanya:
+        </p>
+      </div>
+      
+      <div class="flow-container">
+        <!-- Step 1 -->
+        <div class="flow-step">
+          1. Input Kriteria
+          <p style="font-size: 0.75rem; color: var(--color-gray); margin: 0; text-transform: none;">Beban, Tidur, & Aktivitas</p>
+        </div>
+        <div class="flow-arrow">
+          <span class="flow-arrow-vertical">↓</span>
+          <span class="flow-arrow-horizontal">➔</span>
+        </div>
+        
+        <!-- Step 2 -->
+        <div class="flow-step">
+          2. Fuzzifikasi
+          <p style="font-size: 0.75rem; color: var(--color-gray); margin: 0; text-transform: none;">Fungsi Keanggotaan Segitiga</p>
+        </div>
+        <div class="flow-arrow">
+          <span class="flow-arrow-vertical">↓</span>
+          <span class="flow-arrow-horizontal">➔</span>
+        </div>
+        
+        <!-- Step 3 -->
+        <div class="flow-step">
+          3. Rule Base
+          <p style="font-size: 0.75rem; color: var(--color-gray); margin: 0; text-transform: none;">27 Kombinasi Aturan</p>
+        </div>
+        <div class="flow-arrow">
+          <span class="flow-arrow-vertical">↓</span>
+          <span class="flow-arrow-horizontal">➔</span>
+        </div>
+        
+        <!-- Step 4 -->
+        <div class="flow-step">
+          4. Inferensi Mamdani
+          <p style="font-size: 0.75rem; color: var(--color-gray); margin: 0; text-transform: none;">Implikasi MIN & MAX</p>
+        </div>
+        <div class="flow-arrow">
+          <span class="flow-arrow-vertical">↓</span>
+          <span class="flow-arrow-horizontal">➔</span>
+        </div>
+        
+        <!-- Step 5 -->
+        <div class="flow-step">
+          5. Defuzzifikasi
+          <p style="font-size: 0.75rem; color: var(--color-gray); margin: 0; text-transform: none;">Metode Centroid (COA)</p>
+        </div>
+        <div class="flow-arrow">
+          <span class="flow-arrow-vertical">↓</span>
+          <span class="flow-arrow-horizontal">➔</span>
+        </div>
+        
+        <!-- Step 6 -->
+        <div class="flow-step">
+          6. Hasil Burnout
+          <p style="font-size: 0.75rem; color: var(--color-gray); margin: 0; text-transform: none;">Skor % & Rekomendasi</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4 - STATISTIK -->
+  <section id="statistics" class="stats-section">
+    <div class="container">
+      <div style="text-align: center;">
+        <h2>Statistik Pengguna Realtime</h2>
+        <p style="max-width: 700px; margin: 0 auto;">
+          Data statistik sebaran burnout mahasiswa yang dihimpun secara realtime dari server Supabase PostgreSQL.
+        </p>
+      </div>
+      
+      <div class="stats-grid">
+        <div class="stat-card accent">
+          <div id="stat-total" class="stat-value">0</div>
+          <div class="stat-label">Total Assessment</div>
+        </div>
+        <div class="stat-card">
+          <div id="stat-rendah" class="stat-value" style="color: var(--color-success);">0</div>
+          <div class="stat-label">Burnout Rendah</div>
+        </div>
+        <div class="stat-card">
+          <div id="stat-sedang" class="stat-value" style="color: var(--color-warning);">0</div>
+          <div class="stat-label">Burnout Sedang</div>
+        </div>
+        <div class="stat-card">
+          <div id="stat-tinggi" class="stat-value" style="color: var(--color-danger);">0</div>
+          <div class="stat-label">Burnout Tinggi</div>
+        </div>
+      </div>
+      
+      <!-- Chart sederhana HTML + CSS -->
+      <div class="chart-container">
+        <h3 class="chart-title">Grafik Distribusi Kategori Burnout</h3>
+        
+        <!-- Bar Rendah -->
+        <div class="chart-bar-group">
+          <div class="chart-bar-header">
+            <span>Burnout Rendah (0 - 50%)</span>
+            <span id="chart-val-rendah">0 Mahasiswa (0%)</span>
+          </div>
+          <div class="chart-bar-outer">
+            <div id="chart-bar-rendah" class="chart-bar-inner rendah"></div>
+          </div>
+        </div>
+        
+        <!-- Bar Sedang -->
+        <div class="chart-bar-group">
+          <div class="chart-bar-header">
+            <span>Burnout Sedang (50 - 75%)</span>
+            <span id="chart-val-sedang">0 Mahasiswa (0%)</span>
+          </div>
+          <div class="chart-bar-outer">
+            <div id="chart-bar-sedang" class="chart-bar-inner sedang"></div>
+          </div>
+        </div>
+        
+        <!-- Bar Tinggi -->
+        <div class="chart-bar-group">
+          <div class="chart-bar-header">
+            <span>Burnout Tinggi (75 - 100%)</span>
+            <span id="chart-val-tinggi">0 Mahasiswa (0%)</span>
+          </div>
+          <div class="chart-bar-outer">
+            <div id="chart-bar-tinggi" class="chart-bar-inner tinggi"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5 - CALL TO ACTION (CTA) -->
+  <section id="cta" class="cta-section" style="background-color: var(--color-accent-bg); border-bottom: var(--border-width) solid var(--color-black); text-align: center; padding: 5rem var(--spacing-lg);">
+    <div class="container" style="max-width: 800px; gap: var(--spacing-md); align-items: center;">
+      <h2 style="border-bottom: none; margin-bottom: var(--spacing-xs); text-transform: uppercase;">Siap untuk Mengukur Tingkat Burnout Anda?</h2>
+      <p style="color: var(--color-black); font-size: 1.1rem; max-width: 600px; margin-bottom: var(--spacing-lg);">
+        Hanya membutuhkan waktu sekitar 2 menit untuk menginput kriteria akademik, tidur, dan aktivitas non-akademik Anda guna mendapatkan diagnosis cerdas menggunakan logika fuzzy Mamdani.
+      </p>
+      <a href="assessment.html" class="btn btn-primary" style="font-size: 1.1rem; padding: 1rem 2.5rem; box-shadow: var(--shadow-brutal); display: inline-flex;">Mulai Deteksi Sekarang</a>
+    </div>
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer class="footer-section">
+    <div class="container">
+      <h2>Sistem SPK Burnout</h2>
+      <p>
+        Dikembangkan menggunakan HTML5, CSS3, Vanilla Javascript, dan Supabase Database.
+      </p>
+      <p style="font-size: 0.8rem; opacity: 0.7;">
+        Aplikasi ini memproses perhitungan logika fuzzy Mamdani langsung pada peramban klien demi performa yang cepat dan efisien.
+      </p>
+      <div class="footer-references">
+        &copy; 2026 SPK Deteksi Burnout Mahasiswa. Referensi Metode: <em>Fuzzy Inference System (FIS) Mamdani</em>.
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== MODAL ACTIVITY FEED ==================== -->
+  <div id="modal-activity-feed" class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Aktivitas Assessment Terbaru</h3>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body" id="activity-feed-container">
+        <!-- Container akan diisi secara dinamis oleh activityFeed.js -->
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary modal-close">Tutup</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script modul inisialisasi -->
+  <script type="module" src="assets/js/main.js"></script>
+
+</body>
+</html>
+
