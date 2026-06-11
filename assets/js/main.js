@@ -51,21 +51,21 @@ function resetWizard() {
   if (inputProdi) inputProdi.value = '';
   if (inputSemester) inputSemester.value = '1';
   
-  // Reset sliders
+  // Reset sliders ke nilai default baru (sesuai domain laporan terbaru)
   const sliderBeban = document.getElementById('slider-beban');
   const valBeban = document.getElementById('val-beban');
-  if (sliderBeban) sliderBeban.value = '50';
-  if (valBeban) valBeban.textContent = '50';
+  if (sliderBeban) sliderBeban.value = '30';
+  if (valBeban) valBeban.textContent = '30 Jam/Minggu';
   
   const sliderTidur = document.getElementById('slider-tidur');
   const valTidur = document.getElementById('val-tidur');
-  if (sliderTidur) sliderTidur.value = '6';
-  if (valTidur) valTidur.textContent = '6';
+  if (sliderTidur) sliderTidur.value = '5';
+  if (valTidur) valTidur.textContent = '5 Jam/Hari';
   
   const sliderAktivitas = document.getElementById('slider-aktivitas');
   const valAktivitas = document.getElementById('val-aktivitas');
-  if (sliderAktivitas) sliderAktivitas.value = '50';
-  if (valAktivitas) valAktivitas.textContent = '50';
+  if (sliderAktivitas) sliderAktivitas.value = '20';
+  if (valAktivitas) valAktivitas.textContent = '20 Jam/Minggu';
 
   // Reset reCAPTCHA jika g-recaptcha tersedia di global scope
   if (window.grecaptcha) {
@@ -93,12 +93,12 @@ function resetWizard() {
   showStep(1);
 }
 
-// Inisialisasi Slider live value
+// Inisialisasi Slider live value dengan satuan
 function initSliders() {
   const sliders = [
-    { id: 'slider-beban', valId: 'val-beban' },
-    { id: 'slider-tidur', valId: 'val-tidur' },
-    { id: 'slider-aktivitas', valId: 'val-aktivitas' }
+    { id: 'slider-beban', valId: 'val-beban', unit: 'Jam/Minggu' },
+    { id: 'slider-tidur', valId: 'val-tidur', unit: 'Jam/Hari' },
+    { id: 'slider-aktivitas', valId: 'val-aktivitas', unit: 'Jam/Minggu' }
   ];
 
   sliders.forEach(slider => {
@@ -106,7 +106,7 @@ function initSliders() {
     const valEl = document.getElementById(slider.valId);
     if (el && valEl) {
       el.addEventListener('input', (e) => {
-        valEl.textContent = e.target.value;
+        valEl.textContent = `${e.target.value} ${slider.unit}`;
       });
     }
   });
@@ -180,14 +180,15 @@ function executeFuzzyMamdani() {
   };
 }
 
-// Rekomendasi berdasarkan kategori burnout
+// Interpretasi dan rekomendasi berdasarkan kategori burnout
+// Teks sesuai laporan penelitian terbaru
 function getRecommendationText(category, score) {
   if (category === 'Rendah') {
-    return "Tingkat burnout rendah. Pertahankan keseimbangan akademik, istirahat cukup, dan terus jaga aktivitas positif.";
+    return "Kondisi masih aman. Pertahankan pola hidup yang seimbang.";
   } else if (category === 'Sedang') {
-    return "Tingkat burnout sedang. Evaluasi manajemen waktu, tingkatkan kualitas tidur, kurangi beban berlebih.";
+    return "Terdapat indikasi burnout. Pertimbangkan untuk mengurangi beban aktivitas.";
   } else {
-    return "Tingkat burnout tinggi. Segera konsultasi dengan dosen pembimbing atau psikolog. Prioritaskan istirahat dan delegasi tugas.";
+    return "Risiko burnout tinggi. Disarankan melakukan evaluasi aktivitas dan meningkatkan waktu istirahat.";
   }
 }
 

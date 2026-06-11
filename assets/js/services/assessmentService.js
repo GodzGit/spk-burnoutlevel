@@ -5,9 +5,9 @@ import { supabase, isConfigured } from '../config/supabase.js';
  * Menyimpan data assessment burnout baru.
  * @param {Object} payload - Data assessment
  * @param {string} payload.participant_id - ID Partisipan
- * @param {number} payload.beban_akademik - Nilai Beban Akademik (0-100)
- * @param {number} payload.durasi_tidur - Nilai Durasi Tidur (0-12)
- * @param {number} payload.aktivitas_non_akademik - Nilai Aktivitas Non Akademik (0-100)
+ * @param {number} payload.beban_akademik - Nilai Beban Akademik (0-60 jam/minggu)
+ * @param {number} payload.durasi_tidur - Nilai Durasi Tidur (0-10 jam/hari)
+ * @param {number} payload.aktivitas_non_akademik - Nilai Aktivitas Non Akademik (0-40 jam/minggu)
  * @param {number} payload.burnout_score - Skor Burnout (%)
  * @param {string} payload.burnout_category - Kategori Burnout (Rendah, Sedang, Tinggi)
  * @returns {Promise<Object>} Data assessment yang berhasil disimpan

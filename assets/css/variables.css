@@ -1,22 +1,22 @@
 /* variables.css */
 :root {
   /* Colors - Swiss / Soft Brutalism Accent */
-  --color-white: #ffffff;
-  --color-gray-light: #f8fafc;
-  --color-gray-border: #e2e8f0;
-  --color-gray: #64748b;
-  --color-black: #0f172a;
-  --color-accent: #0284c7; /* Sky blue/Cobalt hybrid */
-  --color-accent-dark: #0369a1;
-  --color-accent-bg: #f0f9ff;
-  
-  /* Alert/Feedback Colors */
-  --color-success: #10b981;
-  --color-success-bg: #ecfdf5;
-  --color-warning: #f59e0b;
-  --color-warning-bg: #fffbeb;
-  --color-danger: #ef4444;
-  --color-danger-bg: #fef2f2;
+--color-white: #ffffff;
+--color-gray-light: #f7f7f7;
+--color-gray-border: #e5e5e5;
+--color-gray: #6b7280;
+--color-black: #111827;
+--color-accent: #dc2626; /* Signal Red */
+--color-accent-dark: #b91c1c;
+--color-accent-bg: #fef2f2;
+
+/* Alert/Feedback Colors */
+--color-success: #10b981;
+--color-success-bg: #ecfdf5;
+--color-warning: #f59e0b;
+--color-warning-bg: #fffbeb;
+--color-danger: #7c3aed; /* Purple for danger (contrast to red accent) */
+--color-danger-bg: #f5f3ff;
 
   /* Typography */
   --font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
