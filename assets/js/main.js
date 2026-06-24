@@ -181,14 +181,14 @@ function executeFuzzyMamdani() {
 }
 
 // Interpretasi dan rekomendasi berdasarkan kategori burnout
-// Teks sesuai laporan penelitian terbaru
+// Teks disesuaikan sesuai instruksi terbaru
 function getRecommendationText(category, score) {
   if (category === 'Rendah') {
-    return "Kondisi masih aman. Pertahankan pola hidup yang seimbang.";
+    return "Kondisi Anda saat ini menunjukkan tingkat burnout yang rendah. Tetap jaga keseimbangan antara aktivitas dan waktu istirahat.";
   } else if (category === 'Sedang') {
-    return "Terdapat indikasi burnout. Pertimbangkan untuk mengurangi beban aktivitas.";
+    return "Terdapat beberapa indikasi burnout. Pertimbangkan untuk mengatur kembali beban aktivitas dan waktu pemulihan.";
   } else {
-    return "Risiko burnout tinggi. Disarankan melakukan evaluasi aktivitas dan meningkatkan waktu istirahat.";
+    return "Hasil menunjukkan tingkat burnout yang tinggi. Luangkan waktu untuk pemulihan dan pertimbangkan mencari dukungan yang diperlukan.";
   }
 }
 
@@ -202,26 +202,46 @@ function displayResults(results) {
   const elCategory = document.getElementById('result-category');
   const elRecommendation = document.getElementById('result-recommendation');
   
+  // Ambil kontainer detail hasil rebranding
+  const elScoreDetail = document.getElementById('result-score-detail');
+  const elCategoryDetail = document.getElementById('result-category-detail');
+  
   if (elScore) elScore.textContent = `${score}%`;
+  if (elScoreDetail) elScoreDetail.textContent = `${score}%`;
+  
+  if (elCategoryDetail) {
+    elCategoryDetail.textContent = category;
+    if (category === 'Rendah') {
+      elCategoryDetail.style.color = 'var(--color-success)';
+    } else if (category === 'Sedang') {
+      elCategoryDetail.style.color = 'var(--color-warning)';
+    } else {
+      elCategoryDetail.style.color = 'var(--color-danger)';
+    }
+  }
+  
   if (elCategory) {
-    elCategory.textContent = `Burnout ${category}`;
+    elCategory.textContent = `Burnout ${category}`; // Rebranded to Burnout category
     elCategory.className = `badge ${category.toLowerCase()}`;
-    elCategory.style.border = 'var(--border-width) solid var(--color-black)';
+    elCategory.style.border = '1px solid transparent';
     elCategory.style.padding = '0.4rem 0.8rem';
     elCategory.style.borderRadius = 'var(--border-radius)';
-    elCategory.style.fontWeight = '800';
-    elCategory.style.fontSize = '1.1rem';
+    elCategory.style.fontWeight = '600';
+    elCategory.style.fontSize = '1.05rem';
     
     // Warna sesuai kategori
     if (category === 'Rendah') {
       elCategory.style.backgroundColor = 'var(--color-success-bg)';
       elCategory.style.color = 'var(--color-success)';
+      elCategory.style.borderColor = 'var(--color-success-border)';
     } else if (category === 'Sedang') {
       elCategory.style.backgroundColor = 'var(--color-warning-bg)';
       elCategory.style.color = 'var(--color-warning)';
+      elCategory.style.borderColor = 'var(--color-warning-border)';
     } else {
       elCategory.style.backgroundColor = 'var(--color-danger-bg)';
       elCategory.style.color = 'var(--color-danger)';
+      elCategory.style.borderColor = 'var(--color-danger-border)';
     }
   }
   
@@ -234,6 +254,16 @@ function displayResults(results) {
   const progressCircle = document.getElementById('result-circle-bar');
   if (progressCircle) {
     const offset = 440 - (440 * score / 100);
+    
+    // Sesuaikan warna stroke lingkaran berdasarkan kategori secara dinamis
+    if (category === 'Rendah') {
+      progressCircle.style.stroke = 'var(--color-success)';
+    } else if (category === 'Sedang') {
+      progressCircle.style.stroke = 'var(--color-warning)';
+    } else {
+      progressCircle.style.stroke = 'var(--color-danger)';
+    }
+
     setTimeout(() => {
       progressCircle.style.strokeDashoffset = offset;
     }, 100);
@@ -377,6 +407,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnViewHistory = document.getElementById('nav-view-history');
     if (btnViewHistory) {
       btnViewHistory.addEventListener('click', (e) => {
+        e.preventDefault();
+        updateActivityFeedUI();
+        openModal('modal-activity-feed');
+      });
+    }
+
+    const btnMobileHistory = document.getElementById('mobile-nav-history');
+    if (btnMobileHistory) {
+      btnMobileHistory.addEventListener('click', (e) => {
         e.preventDefault();
         updateActivityFeedUI();
         openModal('modal-activity-feed');

@@ -53,16 +53,17 @@
 
 .about-card {
   background-color: var(--color-white);
-  border: var(--border-width) solid var(--color-black);
+  border: 1px solid var(--color-gray-border);
   border-radius: var(--border-radius);
   padding: var(--spacing-lg);
   box-shadow: var(--shadow-brutal-sm);
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
 }
 
 .about-card:hover {
-  transform: translate(-3px, -3px);
+  transform: translateY(-4px);
   box-shadow: var(--shadow-brutal);
+  border-color: var(--color-accent-border);
 }
 
 .about-card-icon {
@@ -87,28 +88,29 @@
 
 .flow-step {
   background-color: var(--color-white);
-  border: var(--border-width) solid var(--color-black);
-  border-radius: var(--border-radius);
-  padding: var(--spacing-md) var(--spacing-lg);
-  font-weight: 700;
-  font-size: 1.1rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  border: 1px solid var(--color-gray-border);
+  border-radius: 9999px; /* Capsule shape for modern look */
+  padding: var(--spacing-sm) var(--spacing-lg);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-transform: none;
+  letter-spacing: 0;
   min-width: 200px;
   box-shadow: var(--shadow-brutal-sm);
   position: relative;
-  transition: background-color var(--transition-fast), transform var(--transition-fast);
+  transition: background-color var(--transition-fast), transform var(--transition-fast), border-color var(--transition-fast);
 }
 
 .flow-step:hover {
   background-color: var(--color-accent-bg);
-  transform: scale(1.05);
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
 }
 
 .flow-arrow {
   font-size: 1.5rem;
-  color: var(--color-black);
-  font-weight: 800;
+  color: var(--color-gray);
+  font-weight: 500;
   margin: var(--spacing-xs) 0;
 }
 
@@ -126,15 +128,20 @@
 .stat-card {
   text-align: center;
   background-color: var(--color-white);
-  border: var(--border-width) solid var(--color-black);
+  border: 1px solid var(--color-gray-border);
   border-radius: var(--border-radius);
   padding: var(--spacing-md);
   box-shadow: var(--shadow-brutal-sm);
+  transition: transform var(--transition-fast);
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
 }
 
 .stat-value {
-  font-size: 2rem;
-  font-weight: 800;
+  font-size: 2.2rem;
+  font-weight: 700;
   color: var(--color-black);
   margin-bottom: var(--spacing-xs);
 }
@@ -143,13 +150,13 @@
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--color-gray);
 }
 
 .stat-card.accent {
-  border-color: var(--color-accent);
-  box-shadow: 2px 2px 0px 0px var(--color-accent);
+  border-color: var(--color-accent-border);
+  background-color: var(--color-accent-bg);
 }
 
 .stat-card.accent .stat-value {
@@ -159,7 +166,7 @@
 /* Pure CSS Horizontal Progress Chart */
 .chart-container {
   background-color: var(--color-white);
-  border: var(--border-width) solid var(--color-black);
+  border: 1px solid var(--color-gray-border);
   border-radius: var(--border-radius);
   padding: var(--spacing-lg);
   box-shadow: var(--shadow-brutal-sm);
@@ -168,9 +175,9 @@
 
 .chart-title {
   font-size: 1.25rem;
-  font-weight: 800;
+  font-weight: 700;
   margin-bottom: var(--spacing-md);
-  text-transform: uppercase;
+  text-transform: none;
   border-bottom: 1px solid var(--color-gray-border);
   padding-bottom: var(--spacing-xs);
 }
@@ -182,23 +189,24 @@
 .chart-bar-header {
   display: flex;
   justify-content: space-between;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 0.9rem;
   margin-bottom: var(--spacing-xs);
 }
 
 .chart-bar-outer {
   width: 100%;
-  height: 20px;
+  height: 10px; /* Thinner modern bar */
   background-color: var(--color-gray-light);
-  border: var(--border-width) solid var(--color-black);
-  border-radius: var(--border-radius);
+  border: none; /* Clean layout */
+  border-radius: 9999px;
   overflow: hidden;
 }
 
 .chart-bar-inner {
   height: 100%;
   width: 0%; /* Dynamic */
+  border-radius: 9999px;
   transition: width 1s ease-in-out;
 }
 
@@ -221,7 +229,7 @@
   color: var(--color-white);
   text-align: center;
   padding: var(--spacing-xl) var(--spacing-lg);
-  border-top: var(--border-width) solid var(--color-black);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .footer-section h2 {
@@ -247,6 +255,7 @@
 .footer-references a {
   color: var(--color-white);
   text-decoration: underline;
+  transition: var(--transition-fast);
 }
 
 .footer-references a:hover {

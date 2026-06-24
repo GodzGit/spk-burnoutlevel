@@ -9,7 +9,7 @@ section {
   align-items: center;
   padding: 6rem var(--spacing-lg);
   position: relative;
-  border-bottom: var(--border-width) solid var(--color-black);
+  border-bottom: 1px solid var(--color-gray-border); /* Soft separation */
 }
 
 /* Hero section can have a taller default height */

@@ -93,7 +93,7 @@ export async function updateActivityFeedUI() {
     container.innerHTML = '';
     
     assessments.forEach((item, index) => {
-      const participant = item.participants || { nama: 'Mahasiswa', prodi: 'Umum', semester: 1 };
+      const participant = item.participants || { nama: 'Pengguna', prodi: 'Umum', semester: 1 };
       const masked = maskName(participant.nama);
       const relativeTime = timeAgo(item.created_at);
       
@@ -114,7 +114,7 @@ export async function updateActivityFeedUI() {
       
       card.innerHTML = `
         <div>
-          <h4 style="margin: 0; font-size: 1.1rem;">${masked}</h4>
+          <h4 style="margin: 0; font-size: 1.1rem; font-weight: 600;">${masked}</h4>
           <p style="margin: 0; font-size: 0.85rem; color: var(--color-gray);">
             Prodi: ${participant.prodi} | Semester: ${participant.semester}
           </p>
@@ -123,15 +123,18 @@ export async function updateActivityFeedUI() {
           </span>
         </div>
         <div class="flex-column" style="align-items: flex-end; gap: var(--spacing-xs);">
-          <span style="font-weight: 800; font-size: 1.1rem; color: var(--color-black);">
+          <span style="font-weight: 700; font-size: 1.1rem; color: var(--color-black);">
             ${Math.round(item.burnout_score)}%
           </span>
           <span class="badge ${badgeClass}" style="
             padding: 0.25rem 0.5rem;
             font-size: 0.75rem;
-            font-weight: 700;
+            font-weight: 600;
             text-transform: uppercase;
-            border: var(--border-width) solid var(--color-black);
+            border: 1px solid ${
+              badgeClass === 'rendah' ? 'var(--color-success-border)' : 
+              badgeClass === 'sedang' ? 'var(--color-warning-border)' : 'var(--color-danger-border)'
+            };
             border-radius: var(--border-radius);
             background-color: ${
               badgeClass === 'rendah' ? 'var(--color-success-bg)' : 
@@ -174,7 +177,7 @@ export function prependNewActivity(item) {
     container.innerHTML = '';
   }
 
-  const participant = item.participants || { nama: 'Mahasiswa', prodi: 'Umum', semester: 1 };
+  const participant = item.participants || { nama: 'Pengguna', prodi: 'Umum', semester: 1 };
   const masked = maskName(participant.nama);
   const relativeTime = timeAgo(item.created_at);
   
@@ -192,7 +195,7 @@ export function prependNewActivity(item) {
 
   card.innerHTML = `
     <div>
-      <h4 style="margin: 0; font-size: 1.1rem;">${masked}</h4>
+      <h4 style="margin: 0; font-size: 1.1rem; font-weight: 600;">${masked}</h4>
       <p style="margin: 0; font-size: 0.85rem; color: var(--color-gray);">
         Prodi: ${participant.prodi} | Semester: ${participant.semester}
       </p>
@@ -201,15 +204,18 @@ export function prependNewActivity(item) {
       </span>
     </div>
     <div class="flex-column" style="align-items: flex-end; gap: var(--spacing-xs);">
-      <span style="font-weight: 800; font-size: 1.1rem; color: var(--color-black);">
+      <span style="font-weight: 700; font-size: 1.1rem; color: var(--color-black);">
         ${Math.round(item.burnout_score)}%
       </span>
       <span class="badge ${badgeClass}" style="
         padding: 0.25rem 0.5rem;
         font-size: 0.75rem;
-        font-weight: 700;
+        font-weight: 600;
         text-transform: uppercase;
-        border: var(--border-width) solid var(--color-black);
+        border: 1px solid ${
+          badgeClass === 'rendah' ? 'var(--color-success-border)' : 
+          badgeClass === 'sedang' ? 'var(--color-warning-border)' : 'var(--color-danger-border)'
+        };
         border-radius: var(--border-radius);
         background-color: ${
           badgeClass === 'rendah' ? 'var(--color-success-bg)' : 

@@ -31,9 +31,9 @@ export async function updateStatisticsUI() {
     const valSedang = document.getElementById('chart-val-sedang');
     const valTinggi = document.getElementById('chart-val-tinggi');
     
-    if (valRendah) valRendah.textContent = `${stats.rendah} Mahasiswa (${pctRendah}%)`;
-    if (valSedang) valSedang.textContent = `${stats.sedang} Mahasiswa (${pctSedang}%)`;
-    if (valTinggi) valTinggi.textContent = `${stats.tinggi} Mahasiswa (${pctTinggi}%)`;
+    if (valRendah) valRendah.textContent = `${stats.rendah} Pengguna (${pctRendah}%)`;
+    if (valSedang) valSedang.textContent = `${stats.sedang} Pengguna (${pctSedang}%)`;
+    if (valTinggi) valTinggi.textContent = `${stats.tinggi} Pengguna (${pctTinggi}%)`;
     
     // Update lebar progress bar CSS
     const barRendah = document.getElementById('chart-bar-rendah');

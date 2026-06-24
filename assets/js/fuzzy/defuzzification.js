@@ -77,18 +77,18 @@ export function calculateCentroid(aggregatedOutputs, step = 1.0) {
  * Memetakan skor defuzzifikasi ke kategori burnout berdasarkan
  * crossover point fungsi keanggotaan output.
  *
- * Threshold ditentukan dari titik potong (crossover) antar membership:
- *   - Rendah : trapmf [0, 0, 40, 50]   → dominan di skor < 50
- *   - Sedang : trimf  [40, 55, 70]     → dominan di skor 50-70
- *   - Tinggi : trapmf [60, 75, 100, 100] → dominan di skor > 70
+ * Threshold disesuaikan dengan skema range baru:
+ *   - Rendah : 0% - 39%
+ *   - Sedang : 40% - 69%
+ *   - Tinggi : 70% - 100%
  *
  * @param {number} score - Skor burnout hasil defuzzifikasi (0-100)
  * @returns {string} Kategori burnout: 'Rendah', 'Sedang', atau 'Tinggi'
  */
 export function getBurnoutCategory(score) {
-  if (score < 50) {
+  if (score < 40) {
     return 'Rendah';
-  } else if (score <= 70) {
+  } else if (score < 70) {
     return 'Sedang';
   } else {
     return 'Tinggi';
